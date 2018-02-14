@@ -12,8 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
 });
+Route::get('nombre/{nombre}/apellido/{apellido}', function ($nombre, $apellido) {
+    echo $nombre;
+    echo $apellido;
+})->name('nombre');
+
+Route::resource('/proveedores', 'ProveedorController');
+
+
 
 Auth::routes();
 
