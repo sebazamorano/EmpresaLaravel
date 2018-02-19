@@ -28,7 +28,16 @@
                             <input class="form-control" name="precio" type="text" value="{{ old('precio') }}">
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label class="col-lg-2" for="">Categorias</label>
+                        <div class="col-lg-6">
+                            <select class="form-control" name="categorias[]" id="" multiple>
+                                @foreach($categorias as $categoria)
+                                    <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                     <button class="btn btn-success">Guardar</button>
                 </form>
             </div>

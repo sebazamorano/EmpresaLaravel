@@ -18,11 +18,13 @@ Route::get('nombre/{nombre}/apellido/{apellido}', function ($nombre, $apellido) 
     echo $nombre;
     echo $apellido;
 })->name('nombre');
+Route::group(['prefix' => '/mantenedores', 'middleware' => 'auth'], function () {
+    Route::resource('/proveedores', 'ProveedorController');
+    Route::resource('/categoria', 'CategoriaController');
+    Route::resource('/usuarios', 'UsuariosController');
+    Route::resource('/productos', 'ProductoController');
+});
 
-Route::resource('/proveedores', 'ProveedorController');
-Route::resource('/categoria', 'CategoriaController');
-Route::resource('/usuarios', 'UsuariosController');
-Route::resource('/productos', 'ProductoController');
 
 Auth::routes();
 

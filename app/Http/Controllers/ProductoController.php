@@ -2,6 +2,7 @@
 
 namespace Empresa\Http\Controllers;
 
+use Empresa\Categoria;
 use Illuminate\Http\Request;
 use Empresa\Producto;
 use Illuminate\Validation\ValidationException;
@@ -16,7 +17,6 @@ class ProductoController extends Controller
      */
     public function index()
     {
-
         $productos = Producto::all();
 
         return view('producto.index', compact('productos'));
@@ -29,8 +29,9 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
-        return view('producto.create');
+        $categorias = Categoria::all();
+
+        return view('producto.create', compact('categorias'));
     }
 
     /**
@@ -41,13 +42,14 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
             'nombre' => 'required',
-            'precio' => 'required'
+            'precio' => 'required|integer'
         ]);
 
-        Producto::create($request->all());
+        $producto = Producto::create($request->all());
+
+        $producto->categorias()->attach($request->get('categorias'));
 
         return redirect()->route('productos.index');
     }
@@ -73,8 +75,9 @@ class ProductoController extends Controller
     {
         //
         $producto = Producto::findOrFail($id);
+        $categorias = Categoria::all();
 
-        return view('producto.edit', compact('producto'));
+        return view('producto.edit', compact('producto', 'categorias'));
     }
 
     /**
