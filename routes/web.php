@@ -21,9 +21,7 @@ Route::get('nombre/{nombre}/apellido/{apellido}', function ($nombre, $apellido) 
 
 Route::resource('/proveedores', 'ProveedorController');
 Route::resource('/categoria', 'CategoriaController');
-
-
-
+Route::resource('/usuarios', 'UsuariosController');
 
 Auth::routes();
 

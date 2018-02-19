@@ -1,0 +1,34 @@
+
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="panel">
+            <div class="panel-body">
+                <form class="form-horizontal" method="post" action="{{ route('usuarios.update', $usuario->id) }}">
+                    {{ method_field('put') }}
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label class="col-lg-2" for="">Nombre</label>
+                        <div class="col-lg-6">
+                            <input class="form-control" name="name" type="text" value="{{ $usuario->name }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2" for="">Email</label>
+                        <div class="col-lg-6">
+                            <input class="form-control" name="email" type="text" value="{{ $usuario->email }}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2" for="">Password</label>
+                        <div class="col-lg-6">
+                            <input class="form-control" name="password" type="password" value="{{ old('password') }}">
+                        </div>
+                    </div>
+                    <button class="btn btn-success">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection
