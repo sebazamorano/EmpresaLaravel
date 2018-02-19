@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-
+	return view('welcome');
 });
 Route::get('nombre/{nombre}/apellido/{apellido}', function ($nombre, $apellido) {
     echo $nombre;
@@ -20,6 +20,8 @@ Route::get('nombre/{nombre}/apellido/{apellido}', function ($nombre, $apellido) 
 })->name('nombre');
 
 Route::resource('/proveedores', 'ProveedorController');
+Route::resource('/categoria', 'CategoriaController');
+
 
 
 
