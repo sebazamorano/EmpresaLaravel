@@ -8,6 +8,11 @@ class Producto extends Model
 {
     protected $table = 'producto';
 
+    protected $fillable = [
+        'nombre',
+        'precio'
+    ];
+
     public function detalleDocumento()
     {
         return $this->hasMany(DetalleDocumento::class, 'producto_id');

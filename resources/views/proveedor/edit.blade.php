@@ -45,6 +45,6 @@
                     <button class="btn btn-success">Guardar</button>
                 </form>
             </div>
-    </div>
+        </div>
     </div>
 @endsection
