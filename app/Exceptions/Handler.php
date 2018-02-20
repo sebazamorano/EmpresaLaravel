@@ -5,6 +5,7 @@ namespace Empresa\Exceptions;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
 {
@@ -49,6 +50,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof ModelNotFoundException) {
+            Log::info('Se encontro en un error');
+            Log::error('No se encontro registro');
+        }
         return parent::render($request, $exception);
     }
 }

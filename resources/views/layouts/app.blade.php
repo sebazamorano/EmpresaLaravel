@@ -40,6 +40,7 @@
                         <li><a href="{{ route('categoria.index') }}">Categoria</a></li>
                         <li><a href="{{ route('usuarios.index') }}">Usuarios</a></li>
                         <li><a href="{{ route('productos.index') }}">Productos</a></li>
+                        <li><a href="{{ route('documentos.index') }}">Documentos</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

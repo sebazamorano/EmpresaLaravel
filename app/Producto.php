@@ -13,6 +13,11 @@ class Producto extends Model
         'precio'
     ];
 
+    public function ifExistsCategoria($categoria)
+    {
+        return $this->categorias->whereIn('id', [$categoria])->count();
+    }
+
     public function detalleDocumento()
     {
         return $this->hasMany(DetalleDocumento::class, 'producto_id');

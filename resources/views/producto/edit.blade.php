@@ -25,7 +25,7 @@
                         <div class="col-lg-6">
                             <select class="form-control" name="categorias[]" id="" multiple>
                                 @foreach($categorias as $categoria)
-                                    <option value="{{ $categoria->id }}" @if(!!$producto->categorias->whereIn('id', [$categoria->id])->count()) selected @endif>{{ $categoria->nombre }}</option>
+                                    <option value="{{ $categoria->id }}" @if(!!$producto->ifExistsCategoria($categoria->id)) selected @endif>{{ $categoria->nombre }}</option>
                                 @endforeach
                             </select>
                         </div>

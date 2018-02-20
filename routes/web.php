@@ -23,6 +23,7 @@ Route::group(['prefix' => '/mantenedores', 'middleware' => 'auth'], function () 
     Route::resource('/categoria', 'CategoriaController');
     Route::resource('/usuarios', 'UsuariosController');
     Route::resource('/productos', 'ProductoController');
+    Route::resource('/documentos', 'DocumentoController');
 });
 
 

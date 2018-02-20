@@ -2,14 +2,12 @@
 
 namespace Empresa\Http\Controllers;
 
-use Empresa\Categoria;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Empresa\Documento;
+use Empresa\Proveedor;
+use Empresa\TipoDocumento;
 use Illuminate\Http\Request;
-use Empresa\Producto;
-use Illuminate\Validation\ValidationException;
 
-
-class ProductoController extends Controller
+class DocumentoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +16,9 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        $productos = Producto::with('categorias')->get();
-        //$productos = Producto::all();
+        $documentos = Documento::paginate();
 
-        return view('producto.index', compact('productos'));
+        return view('documentos.index', compact('documentos'));
     }
 
     /**
@@ -31,9 +28,10 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        $categorias = Categoria::all();
+        $tipoDocumentos = TipoDocumento::all();
+        $proveedores = Proveedor::all();
 
-        return view('producto.create', compact('categorias'));
+        return view('documentos.create', compact('tipoDocumentos', 'proveedores'));
     }
 
     /**
@@ -45,15 +43,15 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required',
-            'precio' => 'required|integer'
+            'numero' => 'required',
+            'tipo_documento_id' => 'required',
+            'proveedor_id' => 'required',
+            'forma_pago' => 'required'
         ]);
 
-        $producto = Producto::create($request->all());
+        Documento::create($request->all());
 
-        $producto->categorias()->attach($request->get('categorias'));
-
-        return redirect()->route('productos.index');
+        return redirect()->route('documentos.index');
     }
 
     /**
@@ -75,10 +73,7 @@ class ProductoController extends Controller
      */
     public function edit($id)
     {
-        $producto = Producto::with('categorias')->findOrFail($id);
-        $categorias = Categoria::all();
-
-        return view('producto.edit', compact('producto', 'categorias'));
+        //
     }
 
     /**
@@ -90,16 +85,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
-            $producto = Producto::findOrFail($id);
-            $producto->update($request->all());
-
-            $producto->categorias()->sync($request->get('categorias'));
-
-            return redirect()->route('productos.index');
-        } catch (ModelNotFoundException $ex) {
-            return redirect()->back()->withErrors($ex->getMessage());
-        }
+        //
     }
 
     /**
@@ -111,8 +97,5 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         //
-        Producto::find($id)->delete();
-
-        return redirect()->route('productos.index');
     }
 }

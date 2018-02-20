@@ -12,6 +12,7 @@
                     <tr>
                         <th>Nombre</th>
                         <th>Precio</th>
+                        <th>Categorias</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -21,6 +22,13 @@
                         <tr>
                             <th>{{ $producto->nombre }}</th>
                             <th>{{ $producto->precio }}</th>
+                            <th>
+                                <ul>
+                                @foreach($producto->categorias as $categoria)
+                                    <li>{{ $categoria->nombre }}</li>
+                                @endforeach
+                                </ul>
+                            </th>
                             <th>
                                 <a href="{{ route('productos.edit', $producto->id) }}" class="btn btn-primary">Editar</a>
                                 <form action="{{ route('productos.destroy', $producto->id)  }}" method="post">
