@@ -26,6 +26,7 @@ class Documento extends Model
 
         self::creating(function ($documento) {
             $documento->user_id = auth()->user()->getAuthIdentifier();
+
             $max = self::selectRaw('(COALESCE(max(numero),0) + 1) as numero')
                 ->where('tipo_documento_id', $documento->tipo_documento_id)
                 ->first();
@@ -49,7 +50,7 @@ class Documento extends Model
         return $this->belongsTo(Proveedor::class, 'proveedor_id');
     }
 
-    public function documento()
+    public function detalles()
     {
         return $this->hasMany(DetalleDocumento::class, 'documento_id');
     }

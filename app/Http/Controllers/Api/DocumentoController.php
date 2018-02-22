@@ -1,12 +1,10 @@
 <?php
 
-namespace Empresa\Http\Controllers;
+namespace Empresa\Http\Controllers\Api;
 
 use Empresa\Documento;
-use Empresa\Proveedor;
-use Empresa\TipoDocumento;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Empresa\Http\Controllers\Controller;
 
 class DocumentoController extends Controller
 {
@@ -17,13 +15,7 @@ class DocumentoController extends Controller
      */
     public function index()
     {
-        $documentos = Documento::paginate();
-
-        $documentos = Documento::select(['documento.*', DB::raw('tipo_documento.nombre as tipoDocumento')])
-            ->join('tipo_documento', 'tipo_documento.id', '=', 'documento.tipo_documento_id')
-            ->get();
-
-        return view('documentos.index', compact('documentos'));
+        //
     }
 
     /**
@@ -33,10 +25,7 @@ class DocumentoController extends Controller
      */
     public function create()
     {
-        $tipoDocumentos = TipoDocumento::all();
-        $proveedores = Proveedor::all();
-
-        return view('documentos.create', compact('tipoDocumentos', 'proveedores'));
+        //
     }
 
     /**
@@ -47,16 +36,9 @@ class DocumentoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'numero' => 'required',
-            'tipo_documento_id' => 'required',
-            'proveedor_id' => 'required',
-            'forma_pago' => 'required'
-        ]);
+        $documento = Documento::create($request->all());
 
-        Documento::create($request->all());
-
-        return redirect()->route('documentos.index');
+        return response()->json($documento);
     }
 
     /**

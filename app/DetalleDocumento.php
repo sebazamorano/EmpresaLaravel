@@ -8,6 +8,13 @@ class DetalleDocumento extends Model
 {
     protected $table = 'detalle_documento';
 
+    protected $fillable = [
+        'documento_id',
+        'producto_id',
+        'cantidad',
+        'precio'
+    ];
+
     public function producto()
     {
         return $this->belongsTo(Producto::class, 'producto_id');

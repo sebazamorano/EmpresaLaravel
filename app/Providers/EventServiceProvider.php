@@ -2,6 +2,7 @@
 
 namespace Empresa\Providers;
 
+use Empresa\Listeners\LoginUser;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -13,8 +14,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Empresa\Events\Event' => [
-            'Empresa\Listeners\EventListener',
+        'Illuminate\Auth\Events\Login' => [
+            LoginUser::class
         ],
     ];
 

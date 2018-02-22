@@ -4,8 +4,8 @@
 @section('content')
     <div class="container">
         <div class="panel">
-            <documento :tipo-documentos="{{ $tipoDocumentos }}" :proveedores="{{ $proveedores }}"></documento>
-
+            <div class="panel-body">
+            </div>
         </div>
     </div>
 @endsection
