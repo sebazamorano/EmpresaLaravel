@@ -58,6 +58,7 @@
                                 <a class="btn btn-link" href="{{ route('password.request') }}">
                                     Forgot Your Password?
                                 </a>
+                                <a class="btn btn-lg btn-danger" href="{{ route('social.login') }}"><i class="fa fa-google-plus"></i></a>
                             </div>
                         </div>
                     </form>

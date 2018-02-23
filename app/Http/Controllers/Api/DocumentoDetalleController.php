@@ -3,8 +3,11 @@
 namespace Empresa\Http\Controllers\Api;
 
 use Empresa\Documento;
+use Empresa\Mail\DocumentoCreado;
 use Illuminate\Http\Request;
 use Empresa\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class DocumentoDetalleController extends Controller
 {
@@ -45,6 +48,8 @@ class DocumentoDetalleController extends Controller
                 'precio' => $item['valor']
             ]);
         }
+
+        Mail::to(Auth::user()->email, Auth::user()->name)->send(new DocumentoCreado($documento));
 
     }
 
